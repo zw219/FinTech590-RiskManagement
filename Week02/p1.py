@@ -1,7 +1,8 @@
 import numpy as np
 import pandas as pd
-import statsmodels.api as sm
+import statsmodels.formula.api as sm
 from math import *
+
 
 # read file and store
 # switch columns between x and y
@@ -18,10 +19,14 @@ intercept = miu[0] * (-1) * miu[1]
 std = sqrt(sig[0][0] - pow(sig[0][1],2) / sig[1][1])
 
 # OLS
-size = len(file)
-model = sm.OLS(y, x)
-results = model.fit()
+
+results = sm.ols(formula="y ~ x", data=file).fit()
+results.summary()
 
 # Compare beta
 print("Conditional Distribution beta: " + str(beta))
+print("Ordinary Least Squares beta: " + str(results.params[1]))
+
+# compare intercept
+print("Conditional Distribution beta: " + str(intercept))
 print("Ordinary Least Squares beta: " + str(results.params[0]))
