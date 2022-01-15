@@ -1,9 +1,7 @@
 import numpy as np
-from numba import njit
 import pandas as pd
 import statsmodels.formula.api as sm
 from math import *
-import matplotlib.pyplot as plt
 from scipy.stats import norm
 import statistics
 import seaborn as sns
@@ -29,6 +27,7 @@ sns.kdeplot(err)
 
 varx = statistics.variance(x)
 vary = statistics.variance(y)
+# cited from https://analyticsindiamag.com/maximum-likelihood-estimation-python-guide/
 def MLE_Norm(parameters):
     # extract parameters
     const, beta, std_dev = parameters
@@ -42,3 +41,4 @@ def MLE_Norm(parameters):
 
 mle_model = minimize(MLE_Norm, np.array([intercept,beta,sqrt(vary)]), method='L-BFGS-B')
 mle_model
+
