@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 from scipy.stats import norm
 import statistics
 import seaborn as sns
+from scipy.optimize import minimize
 
 # read file and store
 file = pd.read_csv("problem2.csv")
@@ -14,6 +15,7 @@ file = pd.read_csv("problem2.csv")
 x = file.x
 y = file.y
 
+#OLS distribution
 results = sm.ols(formula="y ~ x", data=file).fit()
 results.summary()
 beta = results.params[1]
@@ -24,3 +26,19 @@ for i in range(0, len(file)):
     err.append(e)
 
 sns.kdeplot(err)
+
+varx = statistics.variance(x)
+vary = statistics.variance(y)
+def MLE_Norm(parameters):
+    # extract parameters
+    const, beta, std_dev = parameters
+    # predict the output
+    pred = const + beta*x
+    # Calculate the log-likelihood for normal distribution
+    LL = np.sum(norm.logpdf(y, pred, std_dev))
+    # Calculate the negative log-likelihood
+    neg_LL = -1*LL
+    return neg_LL
+
+mle_model = minimize(MLE_Norm, np.array([intercept,beta,sqrt(vary)]), method='L-BFGS-B')
+mle_model
