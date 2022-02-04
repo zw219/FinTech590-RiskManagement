@@ -2,10 +2,11 @@ import numpy as np
 import pandas as pd
 import statsmodels.formula.api as sm
 from math import *
-from scipy.stats import norm
+
 import statistics
 import seaborn as sns
 from scipy.optimize import minimize
+from numpy.linalg import norm
 
 # read file and store
 file = pd.read_csv("problem2.csv")
