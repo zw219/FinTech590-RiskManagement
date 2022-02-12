@@ -6,7 +6,7 @@ from math import *
 import statistics
 import seaborn as sns
 from scipy.optimize import minimize
-from numpy.linalg import norm
+from numpy.linaçlg import norm
 
 # read file and store
 file = pd.read_csv("problem2.csv")
