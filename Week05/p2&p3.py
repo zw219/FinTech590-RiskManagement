@@ -423,7 +423,7 @@ class MyClass:
                     len(p1.index) - 1)) * std_norm - mu_norm
 
     def VaR_n_port(self):
-        return "A: " + str(self.varA) + "\n" + "B: " + str(self.varB) + "\n" + "C: " + str(self.varC) + "\n" + "Total: " + str(self.varT) + "\n"
+        return "VaR_A: " + str(self.varA) + "\n" + "VaR_B: " + str(self.varB) + "\n" + "VaR_C: " + str(self.varC) + "\n" + "VaR_Total: " + str(self.varT) + "\n"+"\n"
 
     def Es_t_port(self, alpha):
         returns = pd.read_csv("returns.csv")
@@ -473,4 +473,5 @@ a = MyClass("portfolio.csv","DailyPrices.csv")
 print("ES_A: " + str(a.Es_t_portA(0.05)))
 print("ES_B: " + str(a.Es_t_portB(0.05)))
 print("ES_C: " + str(a.Es_t_portC(0.05)))
-print("ES_total: " + str(a.Es_t_port(0.05)))
+print("ES_total: " + str(a.Es_t_port(0.05)) + "\n")
+print(a.VaR_n_port())
